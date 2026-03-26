@@ -23,6 +23,10 @@ jobs:
         with:
           joke: ${{ github.event.comment.body }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Log AI Response
+        run: echo "${{ steps.rate-joke.outputs.result }}"
+
       - name: Update comment
         if: fromJSON(steps.rate-joke.outputs.result).is_joke == true
         uses: peter-evans/create-or-update-comment@v5
